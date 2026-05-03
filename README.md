@@ -175,6 +175,28 @@ TASK notify { RUN "notify.sh" AFTER preprocessing, mainProcess, postProcess IF s
 
 This demonstrates a complex workflow where `notify` depends on multiple prior tasks.
 
+**Output:**
+```
+Executing Task: preprocessing
+   Script: "preprocess.sh"
+   Schedule: EVERY DAY AT 01:00
+
+Executing Task: mainProcess
+   Script: "process.sh"
+   Depends on: preprocessing
+   Condition: success
+
+Executing Task: postProcess
+   Script: "postprocess.sh"
+   Depends on: mainProcess
+   Condition: success
+
+Executing Task: notify
+   Script: "notify.sh"
+   Depends on: preprocessing, mainProcess, postProcess
+   Condition: success
+```
+
 ---
 
 ## 4. Reflection: Design Trade-Offs and Challenges
