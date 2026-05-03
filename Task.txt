@@ -13,3 +13,25 @@ TASK cleanup {
     RUN "cleanup.sh"
     EVERY WEEK ON SUNDAY AT 03:00
 }
+
+TASK verifyBackup {
+    RUN "verify_backup.sh"
+    AFTER backupDB
+    IF success
+}
+
+TASK archiveLogs {
+    RUN "archive_logs.sh"
+    AFTER cleanup
+}
+
+TASK notifyTeam {
+    RUN "notify_team.py"
+    AFTER sendReport
+    IF success
+}
+
+TASK healthCheck {
+    RUN "health_check.sh"
+    EVERY DAY AT 06:00
+}
