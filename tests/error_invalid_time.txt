@@ -1,0 +1,1 @@
+TASK badTime { RUN "script.sh" EVERY DAY AT 25:70 }

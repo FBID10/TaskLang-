@@ -1,0 +1,2 @@
+TASK task1 { RUN "first.sh" EVERY DAY AT 10:00 }
+TASK task2 { RUN "second.sh" DEPENDS ON task1 }

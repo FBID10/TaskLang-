@@ -1,0 +1,1 @@
+TASK testTask { RUN "script.sh" INVALID_KEYWORD AT 12:00 }

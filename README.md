@@ -66,31 +66,31 @@ The **terminals** are the atomic symbols produced by the lexer:
 ### Grammar Specification (EBNF)
 
 ```ebnf
-program         ::= task_list
+program         ::= <task_list>
 
-task_list       ::= task_def
-                  | task_list task_def
+<task_list>     ::= <task_def>
+                  | <task_list> <task_def>
 
-task_def        ::= TASK IDENTIFIER "{" run_stmt schedule_stmt dep_stmt cond_stmt "}"
+<task_def>      ::= "TASK" IDENTIFIER "{" <run_stmt> <schedule_stmt> <dep_stmt> <cond_stmt> "}"
 
-run_stmt        ::= RUN STRING_LITERAL
+<run_stmt>      ::= "RUN" STRING_LITERAL
 
-schedule_stmt   ::= ( EVERY DAY AT TIME_LITERAL )
-                  | ( EVERY WEEK ON IDENTIFIER AT TIME_LITERAL )
-                  | ( AT TIME_LITERAL )
-                  | ε   /* empty */
+<schedule_stmt> ::= "EVERY" "DAY" "AT" TIME_LITERAL
+                  | "EVERY" "WEEK" "ON" IDENTIFIER "AT" TIME_LITERAL
+                  | "AT" TIME_LITERAL
+                  | ε
 
-dep_stmt        ::= ( AFTER identifier_list )
-                  | ( BEFORE identifier_list )
-                  | ( DEPENDS_ON identifier_list )
-                  | ε   /* empty */
+<dep_stmt>      ::= "AFTER" <identifier_list>
+                  | "BEFORE" <identifier_list>
+                  | "DEPENDS_ON" <identifier_list>
+                  | ε
 
-cond_stmt       ::= ( IF SUCCESS )
-                  | ( IF FAIL )
-                  | ε   /* empty */
+<cond_stmt>     ::= "IF" "SUCCESS"
+                  | "IF" "FAIL"
+                  | ε
 
-identifier_list ::= IDENTIFIER
-                  | identifier_list "," IDENTIFIER
+<identifier_list> ::= IDENTIFIER
+                    | <identifier_list> "," IDENTIFIER
 ```
 
 ### Key Technical Features

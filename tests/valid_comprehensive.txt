@@ -1,0 +1,9 @@
+TASK dailyReport { RUN "report.py" EVERY DAY AT 06:00 }
+
+TASK maintenanceTask { RUN "maintenance.sh" EVERY WEEK ON SUNDAY AT 03:00 }
+
+TASK processData { RUN "process.sh" AFTER maintenanceTask IF success }
+
+TASK notify { RUN "notify.sh" AFTER dailyReport, maintenanceTask IF success }
+
+TASK cleanup { RUN "cleanup.sh" AT 23:59 }
