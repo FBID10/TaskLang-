@@ -1,0 +1,1 @@
+TASK badTask { RUN "script.sh" WHAT }
